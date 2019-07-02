@@ -15,7 +15,11 @@ export default class Giphy {
   }
 
   get(pathname, options) {
-    const query = QueryString.stringify({ ...options, api_key: this.api_key });
+    const params = { ...options, api_key: this.api_key };
+    const query = QueryString.stringify(Object.keys(params).reduce((acc, k) => {
+      acc[k] = encodeURIComponent(params[k]);
+      return acc;
+    }, {}));
     return window.fetch(`${this.host}${pathname}?${query}`)
       .then((response) => {
         if (!response.ok) throw new Error(response.statusText);

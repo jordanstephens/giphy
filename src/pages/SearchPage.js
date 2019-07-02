@@ -20,6 +20,17 @@ class SearchPage extends React.Component {
     actions.loadNextPage({ q });
   }
 
+  componentWillReceiveProps(nextProps) {
+    const { actions, location } = this.props;
+    const { location: nextLocation } = nextProps;
+
+    if (location !== nextLocation) {
+      const { q } = QueryString.parse(nextLocation.search.slice(1));
+      actions.reset();
+      actions.loadNextPage({ q });
+    }
+  }
+
   loadMore() {
     const { actions, location } = this.props;
     const { q } = QueryString.parse(location.search.slice(1));
