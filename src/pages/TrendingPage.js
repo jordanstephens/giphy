@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { actions as trendingActions } from '../features/trending';
 import { bindActionCreators } from 'redux';
+import ContentContainer from '../containers/ContentContainer';
 
 class TrendingPage extends React.Component {
   componentDidMount() {
@@ -12,8 +13,10 @@ class TrendingPage extends React.Component {
   }
 
   render() {
+    const { loading, error } = this.props;
     return (
-      <div>Trending</div>
+      <ContentContainer loading={loading} error={error}>
+      </ContentContainer>
     );
   }
 }
