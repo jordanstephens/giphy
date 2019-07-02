@@ -59,7 +59,7 @@ export default class GifList extends React.PureComponent {
   }
 
   render() {
-    const { gifs, onLoadMore } = this.props;
+    const { gifs, onScrollBottom } = this.props;
     if (!gifs.length) return null;
     return (
       <WindowScroller overscanByPixels={configuration.overscan_px}>
@@ -69,7 +69,14 @@ export default class GifList extends React.PureComponent {
               autoHeight={true}
               height={height}
               isScrolling={isScrolling}
-              onScroll={onChildScroll}
+              onScroll={(...args) => {
+                const [{ clientHeight, scrollHeight }] = args;
+                const threshold = clientHeight * 0.2;
+                if (scrollTop + clientHeight > scrollHeight - threshold) {
+                  onScrollBottom();
+                }
+                onChildScroll(...args);
+              }}
               scrollTop={scrollTop}
               cellCount={gifs.length}
               cellMeasurerCache={this._cache}
@@ -77,9 +84,6 @@ export default class GifList extends React.PureComponent {
               cellRenderer={this._cellRenderer}
               width={width}
             />
-            <div>
-              <button onClick={onLoadMore}>Load More</button>
-            </div>
           </Fragment>
         )}
       </WindowScroller>
@@ -98,5 +102,5 @@ GifList.propTypes = {
       }).isRequired,
     }).isRequired,
   })).isRequired,
-  onLoadMore: PropTypes.func.isRequired,
+  onScrollBottom: PropTypes.func.isRequired,
 };

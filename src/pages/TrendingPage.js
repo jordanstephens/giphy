@@ -15,7 +15,7 @@ class TrendingPage extends React.Component {
   componentDidMount() {
     const { actions } = this.props;
     actions.reset();
-    this.loadMore();
+    actions.loadNextPage();
   }
 
   loadMore() {
@@ -29,7 +29,7 @@ class TrendingPage extends React.Component {
       <ContentContainer loading={loading} error={error}>
         <GifList
           gifs={gifs}
-          onLoadMore={this.loadMore}
+          onScrollBottom={this.loadMore}
         />
       </ContentContainer>
     );
