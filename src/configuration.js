@@ -7,6 +7,7 @@ const configuration = {
     production: process.env.REACT_APP_API_KEY
   },
   page_size: 25,
+  overscan_px: 0,
 };
 
 const environments = ['development', 'test', 'production'];

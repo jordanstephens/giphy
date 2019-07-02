@@ -4,18 +4,33 @@ import { connect } from 'react-redux';
 import { actions as trendingActions } from '../features/trending';
 import { bindActionCreators } from 'redux';
 import ContentContainer from '../containers/ContentContainer';
+import GifList from '../components/GifList';
 
 class TrendingPage extends React.Component {
+  constructor(props) {
+    super(props);
+    this.loadMore = this.loadMore.bind(this);
+  }
+
   componentDidMount() {
     const { actions } = this.props;
     actions.reset();
+    this.loadMore();
+  }
+
+  loadMore() {
+    const { actions } = this.props;
     actions.loadNextPage();
   }
 
   render() {
-    const { loading, error } = this.props;
+    const { gifs, loading, error } = this.props;
     return (
       <ContentContainer loading={loading} error={error}>
+        <GifList
+          gifs={gifs}
+          onLoadMore={this.loadMore}
+        />
       </ContentContainer>
     );
   }
