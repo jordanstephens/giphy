@@ -5,7 +5,8 @@ const configuration = {
     development: process.env.REACT_APP_API_KEY,
     test: 'test-api-key',
     production: process.env.REACT_APP_API_KEY
-  }
+  },
+  page_size: 25,
 };
 
 const environments = ['development', 'test', 'production'];
