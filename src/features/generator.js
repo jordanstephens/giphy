@@ -1,4 +1,14 @@
+import async from 'async';
 import configuration from '../configuration';
+
+const CONCURRENCY = 1;
+const queue = async.queue((task, callback) => {
+  task().then(
+    (...args) => callback(null, ...args),
+    (error) => callback(error)
+  );
+}, CONCURRENCY);
+
 
 export function generate(prefix, fetcher) {
   const ACTION = {
@@ -24,14 +34,22 @@ export function generate(prefix, fetcher) {
   });
 
   const loadNextPage = (options = {}) => (dispatch, getState) => {
-    const state = getState();
-    const limit = configuration.page_size;
-    const offset = state[prefix].offset;
+    return new Promise((resolve, reject) => {
+      const task = () => {
+        const limit = configuration.page_size;
+        const state = getState();
+        const offset = state[prefix].offset;
+        dispatch(setFetchRequested(offset + limit));
+        return fetcher({ ...options, offset, limit })
+          .then((page) => dispatch(setPageLoadSucceeded(page)))
+          .catch((error) => dispatch(setPageLoadFailed(error)));
+      };
 
-    dispatch(setFetchRequested(offset + limit));
-    return fetcher({ ...options, offset, limit })
-      .then((page) => dispatch(setPageLoadSucceeded(page)))
-      .catch((error) => dispatch(setPageLoadFailed(error)));
+      queue.push(task, (error, action) => {
+        if (error) return reject(error);
+        resolve(action);
+      });
+    });
   };
 
   const reset = () => ({ type: ACTION.RESET });
@@ -50,7 +68,7 @@ export function generate(prefix, fetcher) {
         ...state,
         loading: true,
         error: undefined,
-        offset: action.payload.offset
+        offset: state.offset + action.payload.offset,
       };
     case ACTION.FETCH_FAILED:
       return {
@@ -63,6 +81,7 @@ export function generate(prefix, fetcher) {
         ...state,
         loading: false,
         error: undefined,
+
         gifs: [...state.gifs, ...action.payload.page.data],
       };
     case ACTION.RESET:
@@ -74,6 +93,7 @@ export function generate(prefix, fetcher) {
 
   return {
     ACTION,
+    INITIAL_STATE,
     reducer,
     actions: {
       loadNextPage,
