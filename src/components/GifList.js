@@ -48,14 +48,19 @@ export default class GifList extends React.PureComponent {
           <Link
             to={`/gif/${gif.id}`}
           >
-            <img
-              src={image.url}
-              alt={gif.title}
-              style={{
-                height: image.height,
-                width: image.width
-              }}
-            />
+            <picture>
+              <source srcSet={image.webp} type="image/webp" />
+              <img
+                src={image.url}
+                alt={gif.title}
+                height={image.height}
+                width={image.width}
+                style={{
+                  height: image.height,
+                  width: image.width
+                }}
+              />
+            </picture>
             <h4>{gif.title}</h4>
           </Link>
         </div>
@@ -103,6 +108,7 @@ GifList.propTypes = {
     images: PropTypes.shape({
       fixed_width: PropTypes.shape({
         url: PropTypes.string.isRequired,
+        webp: PropTypes.string.isRequired,
         width: PropTypes.string.isRequired,
         height: PropTypes.string.isRequired,
       }).isRequired,
