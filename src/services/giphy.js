@@ -14,7 +14,11 @@ export default class Giphy {
     return this.get('/v1/gifs/trending', options);
   }
 
-  get(pathname, options) {
+  gif(id) {
+    return this.get(`/v1/gifs/${id}`);
+  }
+
+  get(pathname, options = {}) {
     const params = { ...options, api_key: this.api_key };
     const query = QueryString.stringify(Object.keys(params).reduce((acc, k) => {
       acc[k] = encodeURIComponent(params[k]);
