@@ -1,5 +1,6 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import {
   CellMeasurer,
   CellMeasurerCache,
@@ -44,15 +45,19 @@ export default class GifList extends React.PureComponent {
         parent={parent}
       >
         <div style={style}>
-          <img
-            src={image.url}
-            alt={gif.title}
-            style={{
-              height: image.height,
-              width: image.width
-            }}
-          />
-          <h4>{gif.title}</h4>
+          <Link
+            to={`/gif/${gif.id}`}
+          >
+            <img
+              src={image.url}
+              alt={gif.title}
+              style={{
+                height: image.height,
+                width: image.width
+              }}
+            />
+            <h4>{gif.title}</h4>
+          </Link>
         </div>
       </CellMeasurer>
     );
@@ -93,6 +98,7 @@ export default class GifList extends React.PureComponent {
 
 GifList.propTypes = {
   gifs: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
     images: PropTypes.shape({
       fixed_width: PropTypes.shape({
