@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import filesize from 'filesize';
+import configuration from '../configuration';
 
 import './GifView.css';
 
@@ -8,6 +9,9 @@ const GifView = ({ gif }) => {
   if (!gif) return null;
 
   const image = gif.images.original;
+  const colors = configuration.colors;
+  const backgroundColor = colors[gif.id.charCodeAt('0') % colors.length];
+
   return (
     <section>
       <div>
@@ -15,11 +19,21 @@ const GifView = ({ gif }) => {
           <h2>{gif.title}</h2>
         </header>
         <main>
-          <img src={image.url} width={image.width} height={image.height} alt={gif.title} />
+          <picture>
+            <source srcSet={image.webp} type="image/webp" />
+            <img
+              src={image.url}
+              alt={gif.title}
+              height={image.height}
+              width={image.width}
+              style={{ backgroundColor }}
+              className='gif'
+            />
+          </picture>
         </main>
       </div>
       <footer>
-        <dl>
+        <dl className='gif-info'>
           <dt>Source</dt>
           <dd>
             <a
@@ -56,6 +70,7 @@ GifView.propTypes = {
     import_datetime: PropTypes.string.isRequired,
     images: PropTypes.shape({
       original: PropTypes.shape({
+        webp: PropTypes.string.isRequired,
         url: PropTypes.string.isRequired,
         width: PropTypes.number.isRequired,
         height: PropTypes.number.isRequired,

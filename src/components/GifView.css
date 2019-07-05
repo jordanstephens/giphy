@@ -1,0 +1,19 @@
+.gif {
+  display: block;
+  height: auto;
+  width: 100%;
+}
+
+.gif-info {
+  display: grid;
+  grid-template-columns: 180px 1fr;
+  font-size: 14px;
+  line-height: 1.6;
+  background-color: rgba(255, 255, 255, 0.25);
+  padding: 20px;
+}
+
+.gif-info dt { font-weight: bold; }
+.gif-info dd { margin-left: 10px; }
+
+.gif-info a { color: #fff; }
