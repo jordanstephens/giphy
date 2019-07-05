@@ -1,0 +1,27 @@
+.search-form {
+  flex-grow: 1;
+  text-align: right;
+  display: flex;
+  margin-left: 40px;
+}
+
+@media (max-width: 500px) {
+  .search-form { margin-left: 0; width: 100%; }
+}
+
+.search-field {
+  flex-grow: 1;
+  font-size: 16px;
+  padding: 10px;
+  border: none;
+}
+
+.search-button {
+  background: rgb(0, 204, 255);
+  border: none;
+  color: #fff;
+  padding: 10px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+}

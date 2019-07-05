@@ -11,14 +11,28 @@ function App({ push, history }) {
   const { q } = QueryString.parse(window.location.search.slice(1));
   return (
     <ConnectedRouter history={history}>
-      <AppHeader
-        q={q && decodeURIComponent(q)}
-        onSearch={(event, { q }) => {
-          event.preventDefault();
-          push(`/search?q=${encodeURIComponent(q)}`);
-        }}
-      />
-      { routes }
+      <div className='section-container'>
+        <header className='header-content'>
+          <AppHeader
+            q={q && decodeURIComponent(q)}
+            onSearch={(event, { q }) => {
+              event.preventDefault();
+              push(`/search?q=${encodeURIComponent(q)}`);
+            }}
+          />
+        </header>
+      </div>
+      <div className='section-container'>
+        <main className='main-content'>
+          { routes }
+        </main>
+      </div>
+      <div className='section-container footer'>
+        <div className='footer-border' />
+        <footer className='footer-content'>
+          Giphy Viewer by <a href='https://jordanstephens.com'>@jordanstephens</a>
+        </footer>
+      </div>
     </ConnectedRouter>
   );
 }

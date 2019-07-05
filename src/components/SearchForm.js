@@ -25,9 +25,18 @@ class SearchForm extends React.Component {
 
   render() {
     return (
-      <form onSubmit={this.onSubmit}>
-        <input type="text" name="q" value={this.state.q} onChange={this.onChange} />
-        <button type="submit">Search</button>
+      <form onSubmit={this.onSubmit} className='search-form'>
+        <input
+          type="text"
+          name="q"
+          value={this.state.q}
+          placeholder='Search GIFs'
+          onChange={this.onChange}
+          className='search-field'
+        />
+        <button type="submit" className='search-button'>
+          Go!
+        </button>
       </form>
     );
   }
