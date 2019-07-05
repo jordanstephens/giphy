@@ -7,6 +7,11 @@ const configuration = {
     production: process.env.REACT_APP_API_KEY
   },
   page_size: 25,
+  // I had a really hard time naming this, but this is how we derive
+  // the distance from the bottom of the page at which we request the
+  // next page of content. We take this fraction of the window height
+  // and use that as the scroll threshold.
+  page_bumper_ratio: 0.2,
   overscan_px: 0,
 };
 

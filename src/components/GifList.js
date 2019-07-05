@@ -81,7 +81,7 @@ export default class GifList extends React.PureComponent {
               isScrolling={isScrolling}
               onScroll={(...args) => {
                 const [{ clientHeight, scrollHeight }] = args;
-                const threshold = clientHeight * 0.2;
+                const threshold = clientHeight * configuration.page_bumper_ratio;
                 if (scrollTop + clientHeight > scrollHeight - threshold) {
                   onScrollBottom();
                 }
