@@ -1,0 +1,30 @@
+.gif-container-link {
+  display: block;
+  position: relative;
+}
+
+.hover-overlay {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  opacity: 0;
+  transition: opacity 200ms ease-in-out;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: #eee;
+  padding: 12px;
+}
+
+.gif-container:hover .hover-overlay {
+  opacity: 1;
+}
+
+.gif-title {
+  margin: 0;
+  font-size: 16px;
+}
+
+.gif-time {
+  font-size: 12px;
+}

@@ -9,7 +9,11 @@ import {
   WindowScroller
 } from 'react-virtualized';
 
+import timeago from 'node-time-ago';
+
 import configuration from '../configuration';
+
+import './GifList.css';
 
 export default class GifList extends React.PureComponent {
   constructor(props) {
@@ -20,7 +24,6 @@ export default class GifList extends React.PureComponent {
     this._columnCount = 0;
 
     this._cache = new CellMeasurerCache({
-      defaultHeight: 250,
       defaultWidth: grid_column_width_px,
       fixedWidth: true,
     });
@@ -58,6 +61,8 @@ export default class GifList extends React.PureComponent {
   _cellRenderer ({ index, key, parent, style }) {
     const gif = this.props.gifs[index];
     const image = gif.images.fixed_width;
+    const colors = configuration.colors;
+    const backgroundColor = colors[gif.id.charCodeAt('0') % colors.length];
 
     return (
       <CellMeasurer
@@ -66,9 +71,10 @@ export default class GifList extends React.PureComponent {
         key={key}
         parent={parent}
       >
-        <div style={style}>
+        <div className='gif-container' style={style}>
           <Link
             to={`/gif/${gif.id}`}
+            className='gif-container-link'
           >
             <picture>
               <source srcSet={image.webp} type="image/webp" />
@@ -77,13 +83,17 @@ export default class GifList extends React.PureComponent {
                 alt={gif.title}
                 height={image.height}
                 width={image.width}
-                style={{
-                  height: image.height,
-                  width: image.width
-                }}
+                style={{ backgroundColor }}
               />
             </picture>
-            <h4>{gif.title}</h4>
+            <div className='hover-overlay'>
+              <h4 className='gif-title'>
+                {gif.title}
+              </h4>
+              <span className='gif-time'>
+                {timeago(gif.import_datetime)}
+              </span>
+            </div>
           </Link>
         </div>
       </CellMeasurer>
@@ -103,7 +113,7 @@ export default class GifList extends React.PureComponent {
           const columnCount = this._getColumnCount(width);
           const containerWidth = (columnCount * grid_column_width_px) + ((columnCount - 1) * grid_gutter_px);
           return (
-            <div style={{ margin: '0 auto', width: containerWidth }}>
+            <div style={{ width: containerWidth }}>
               <Masonry
                 ref={(r) => this._masonry = r}
                 autoHeight={true}
@@ -144,6 +154,7 @@ GifList.propTypes = {
         height: PropTypes.string.isRequired,
       }).isRequired,
     }).isRequired,
+    import_datetime: PropTypes.string.isRequired,
   })).isRequired,
   onScrollBottom: PropTypes.func.isRequired,
 };
