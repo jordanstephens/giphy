@@ -12,6 +12,9 @@ const configuration = {
   // next page of content. We take this fraction of the window height
   // and use that as the scroll threshold.
   page_bumper_ratio: 0.2,
+  grid_gutter_px: 10,
+  grid_column_width_px: 200,
+  grid_padding_px: 20,
   overscan_px: 0,
 };
 
