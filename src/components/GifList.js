@@ -9,8 +9,7 @@ import {
   WindowScroller
 } from 'react-virtualized';
 
-import timeago from 'node-time-ago';
-
+import { timeago } from '../utils/timeago';
 import configuration from '../configuration';
 
 import './GifList.css';
