@@ -1,0 +1,86 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders with a gif 1`] = `
+<section>
+  <div>
+    <header>
+      <h2>
+        
+      </h2>
+    </header>
+    <main>
+      <picture>
+        <source
+          srcSet="https://media2.giphy.com/media/H3qWY13eGZUomKxOs6/giphy.webp?cid=b430c6c65d1fdd9a376a726d49a8db49&rid=giphy.webp"
+          type="image/webp"
+        />
+        <img
+          alt=""
+          className="gif"
+          height="267"
+          src="https://media2.giphy.com/media/H3qWY13eGZUomKxOs6/giphy.gif?cid=b430c6c65d1fdd9a376a726d49a8db49&rid=giphy.gif"
+          style={
+            Object {
+              "backgroundColor": "rgb(153, 251, 255)",
+            }
+          }
+          width="480"
+        />
+      </picture>
+    </main>
+  </div>
+  <footer>
+    <dl
+      className="gif-info"
+    >
+      <dt>
+        Source
+      </dt>
+      <dd>
+        <a
+          href="https://youtu.be/QJ0rDnoi8A4"
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          youtu.be
+        </a>
+      </dd>
+      <dt>
+        Rating
+      </dt>
+      <dd>
+        G
+      </dd>
+      <dt>
+        Uploaded
+      </dt>
+      <dd>
+        2019-7-5
+      </dd>
+      <dt>
+        Dimensions
+      </dt>
+      <dd>
+        480
+         x 
+        267
+         px
+      </dd>
+      <dt>
+        Size
+      </dt>
+      <dd>
+        1.27 MB
+      </dd>
+      <dt>
+        Frames
+      </dt>
+      <dd>
+        35
+      </dd>
+    </dl>
+  </footer>
+</section>
+`;
+
+exports[`renders without a gif 1`] = `null`;

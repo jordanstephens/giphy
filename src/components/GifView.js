@@ -72,8 +72,8 @@ GifView.propTypes = {
       original: PropTypes.shape({
         webp: PropTypes.string.isRequired,
         url: PropTypes.string.isRequired,
-        width: PropTypes.number.isRequired,
-        height: PropTypes.number.isRequired,
+        width: PropTypes.string.isRequired,
+        height: PropTypes.string.isRequired,
         size: PropTypes.string.isRequired,
         frames: PropTypes.string.isRequired,
       }).isRequired,

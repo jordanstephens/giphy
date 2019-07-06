@@ -1,0 +1,45 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders with q 1`] = `
+<form
+  className="search-form"
+  onSubmit={[Function]}
+>
+  <input
+    className="search-field"
+    name="q"
+    onChange={[Function]}
+    placeholder="Search GIFs"
+    type="text"
+    value="test"
+  />
+  <button
+    className="search-button"
+    type="submit"
+  >
+    Go!
+  </button>
+</form>
+`;
+
+exports[`renders without q 1`] = `
+<form
+  className="search-form"
+  onSubmit={[Function]}
+>
+  <input
+    className="search-field"
+    name="q"
+    onChange={[Function]}
+    placeholder="Search GIFs"
+    type="text"
+    value=""
+  />
+  <button
+    className="search-button"
+    type="submit"
+  >
+    Go!
+  </button>
+</form>
+`;

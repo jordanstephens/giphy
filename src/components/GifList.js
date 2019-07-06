@@ -158,3 +158,7 @@ GifList.propTypes = {
   })).isRequired,
   onScrollBottom: PropTypes.func.isRequired,
 };
+
+GifList.defaultProps = {
+  gifs: []
+};
