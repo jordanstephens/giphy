@@ -16,6 +16,9 @@ const configuration = {
   grid_column_width_px: 200,
   grid_padding_px: 20,
   overscan_px: 0,
+  max_fill_screen_loads: 4,
+  fill_screen_interval: 1000,
+  fill_screen_timeout: 1000,
   colors: ['rgb(0, 255, 153)', 'rgb(0, 204, 255)', 'rgb(153, 251, 255)', 'rgb(255, 102, 102)', 'rgb(255, 243, 92)']
 };
 
