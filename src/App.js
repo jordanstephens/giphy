@@ -3,12 +3,14 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import QueryString from 'query-string';
 import { ConnectedRouter, push } from 'connected-react-router';
+import { createLocation } from 'history';
 import routes from './routes';
 import AppHeader from './components/AppHeader';
 import './App.css';
 
 function App({ push, history }) {
-  const { q } = QueryString.parse(window.location.search.slice(1));
+  const location = createLocation(window.location.hash.slice(1));
+  const { q } = QueryString.parse(location.search.slice(1));
   return (
     <ConnectedRouter history={history}>
       <div className='section-container'>
